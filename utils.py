@@ -52,7 +52,7 @@ def target(reward, gamma, q_vals_next, target_policy, done):
         done(bool): flag indicating terminal state 
     """
     probs = torch.from_numpy(target_policy(q_vals_next)[1]).float()
-    return (reward + gamma * (torch.dot(q_vals_next, probs).float()) * (1.-done)).float()
+    return (reward + gamma * (torch.dot(q_vals_next.cpu(), probs).float()) * (1.-done)).float()
 
 
 def copy_model(model_from, model_to, tau=1.0):

@@ -22,7 +22,10 @@ class Agent():
             agent_dict(dict): dictionary containing parameters for agent
             model_dict(dict): dictionary containing parameters for agents model
         """
-        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        if agent_dict.get("enable_gpu", False):
+            self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        else:
+            self.device = torch.device("cpu")
         self.num_episodes = agent_dict.get("num_episodes", 10000)
         self.save_after = agent_dict.get("save_after", -1)
         self.name = agent_dict.get("name", "banana_collector")
@@ -135,7 +138,7 @@ class Agent():
         self.optimizer.step()
         utils.copy_model(self.decision_model, self.policy_model, tau=self.tau)
 
-        td_error = (td_target - q_values[action]).item()
+        td_error = (td_target - q_values[action].cpu()).item()
 
         return td_error, loss
 
