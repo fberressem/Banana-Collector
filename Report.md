@@ -1,6 +1,6 @@
 ### Description of the Implemented Approach
 
-The approach implemented in this repositroy is based on *reinforcement learning*, i.e. it is a machine learning approach in which an agent tries to improve his performance by interacting with the environment. In every step *t* of an episode, the agent chooses one of the actions mentioned above *A<sub>t</sub>* depending on the state *S<sub>t</sub>* he is in and observes the next state as well as a response in the form of a reward *R<sub>t</sub>* which is a real number in general. In this implementation, the algorithm is *value-based*, which means that the agent chooses the action by consulting an *action-value function*    
+The approach implemented in this repository is based on *reinforcement learning*, i.e. it is a machine learning approach in which an agent tries to improve his performance by interacting with the environment. In every step *t* of an episode, the agent chooses one of the actions mentioned above *A<sub>t</sub>* depending on the state *S<sub>t</sub>* he is in and observes the next state as well as a response in the form of a reward *R<sub>t</sub>* which is a real number in general. In this implementation, the algorithm is *value-based*, which means that the agent chooses the action by consulting an *action-value function*    
 <p align="center"> <img src="https://latex.codecogs.com/svg.latex?&space;q_\pi(s,a)" /></p>
 
 which is given as the expected return *G* when taking action *a* in state *s* and subsequently following policy <img src="https://latex.codecogs.com/svg.latex?&space;\pi" />:
@@ -22,3 +22,36 @@ Now in these equations there is some explaining to do as I introduced some non-s
 <p align="center"> <img src="https://latex.codecogs.com/svg.latex?\mathcal{P}_{\bar{\pi}}(\tilde{a}|A_{t+1})=\pi(\tilde{a}|S_{t+1})" /></p>
 
 In principle, this leads to more flexibility in the choice of the update rule, as one can basically encode any on- and off-policy 1-step TD update rule that depends either on the action-values of the next state, *S<sub>t+1</sub>*, or on the the action that was actually taken next, *A<sub>t+1</sub>*.
+
+In the final implementation, a plain Q-Learning update rule was used, even though also other update rules would be possible. The performance was enhanced by using a *dueling network architecture* was used. In this architecture, the calculation of action-values is split into the calculation of state-values and advantages of the different actions, such that
+
+<p align="center"> <img src="https://latex.codecogs.com/svg.latex?q_\pi(s,a)=\tilde{v}_\pi(s)+Adv_\pi(s,a)\" /></p>
+
+where <img src="https://latex.codecogs.com/svg.latex?\tilde{v}_\pi(\cdot)\" /> is a (modified) state-value function, i.e. it describes the value of a given state. As this splitting cannot be done unambiguously (as for example you can always subtract a value from <img src="https://latex.codecogs.com/svg.latex?\tilde{v}_\pi(s)\" /> and add it to <img src="https://latex.codecogs.com/svg.latex?Adv_\pi(s,a)\" />) the convention
+
+<p align="center"> <img src="https://latex.codecogs.com/svg.latex?\tilde{v}_\pi(s)=v_\pi(s)+\left<Adv_\pi(s,\cdot)\right>\" /></p>
+
+was chosen, where <img src="https://latex.codecogs.com/svg.latex?v_\pi(\cdot)\" /> now corresponds to the real state-value function.
+
+Another improvement to the algorithm was the usage of *prioritized replay buffers*: Replay buffers are storages for sequences observed by the agent while interacting with the environment. The memories in the replay buffer can be used to train the agent while not actually interacting with the environment by reusing previous observations. This leads to a more efficient usage of experiences, in turn making learning more efficient. Besides that, it typically leads to better generalization, as the agent is trained on potentially old memories, so that it does not forget about previous experiences and so that it is subject to a larger variety of different situations. Replay buffers can be considered a very simple "model of the environment" in that they assume that memories from the past are representative for the underlying dynamics of the environment. Reusing old memories does not have to be done uniformly but can be prioritized, for example by taking the previous TD error into account when choosing the experiences to relive, hence the name *prioritized* replay buffers.
+
+To make training more stable, *fixed Q-targets* were used. In this technique, the agent uses two neural networks of the same architecture, where one is network not trained via gradient descent but whose weigths <img src="https://latex.codecogs.com/svg.latex?\omega\" /> are updated using soft updates:
+
+<p align="center"> <img src="https://latex.codecogs.com/svg.latex?\omega=\tau\omega^{\prime}+(1-\tau)\omega\" /></p>
+
+here, <img src="https://latex.codecogs.com/svg.latex?\omega^{\prime}" /> are the weights of the neural network that is trained using some form of gradient descent.
+
+
+### Future Improvements
+
+There are some improvements that may be implemented in the future:
+
+1. To make training more stable, one might change the fixed Q-targets part to *double Q-Learning* such that the choice of actions while interacting with the environment is done using either one of the neural networks with the update rules being applied accordingly. In this case, there would be no dedicated *target network* anymore, while training should still be improved, as the networks would still be regularizing each other.
+
+2. One might modify the rewards the agent sees to steer its behavior, e.g. by punishing collecting blue bananas with **`-2`** points instead of **`-1`** to discourage collecting blue bananas.
+
+3. The prioritization in the replay buffer could take into account how successful (or unsuccessful) the episodes they stem from were. This might improve stability of learning as learning about very good or very bad actions would be emphasized.
+
+4. The final experiences from all the episodes could be disregarded when learning, as they are not representative for the value of the state. That is, the agent does not know about whether the next state is a terminal one or not when calculating its expected return, so that when training on this memory, it skews the value of the state, making training less stable. Hence, the performance might be improved by disregarding all next-to-terminal states in the training phase.
+
+5. Better architectures might be found using grid-searching or more sophisticated methods, like evolutionary algorithms. This, however, can be a very time-consuming task and does not yield as many interesting insights into the internal processes of the reinforcement learning agent, so that one should probably rather look into the other proposed improvements. 
