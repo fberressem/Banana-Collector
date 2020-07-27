@@ -23,6 +23,24 @@ To set up the python environment and install all requirements for using this rep
     rm Banana_Linux.zip
     ```
 
+### Quick Start
+
+After installing all requirements and activating the virtual environment training the agent can be started by executing
+
+```bash
+python main.py
+```
+
+Configurations like enabling the visualization or adjustments to the architecture is possible through the dictionaries defined in `main.py`.
+During training a file called `performance.log` is created, which holds information about the current score, the average score of the last 100 episodes, the current loss of the neural network and the average loss of the last 100 episodes. Furthermore, if the agents variable `save_after` is set to a value larger than 0, after the given number of epochs the agents current parameters will be saved in a file with the agents name plus `_parameters.dat`, while the current weights of the agents models will be saved in a file with the agents name plus `_decision.model` or `_policy.model` respectively.
+
+Running
+
+```bash
+python evaluate.py
+```
+
+allows to evaluate the performance of the saved agent of the given name. 
 
 
 ### Background Information
