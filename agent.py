@@ -9,7 +9,6 @@ import numpy as np
 from collections import deque
 
 import utils
-import gym
 import model
 import time
 
