@@ -41,6 +41,13 @@ To make training more stable, *fixed Q-targets* were used. In this technique, th
 
 here, <img src="https://latex.codecogs.com/svg.latex?\omega^{\prime}" /> are the weights of the neural network that is trained using some form of gradient descent.
 
+### Results
+
+The reinforcement agent as configured in `main.py` reaches the required average score (averaged over the last 100 episodes) of **`+13`** after about 400 episodes, but its average score drops immediately after. The agent reaches its peak performance after about 2300 episodes with an stonishing average score of about **`16`**, however it is not able to keep its performance so high throughout the rest of the training. 
+
+![results](https://github.com/fberressem/Banana-Collector/blob/master/Results.png)
+
+In general, the agent performs quite well and solves the task very quickly, however its performance could be more stable. In the following, there are some suggestions on how to improve on that.
 
 ### Future Improvements
 
