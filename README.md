@@ -1,6 +1,8 @@
 # Banana Collector
 Solution to the first project of Udacitys Reinforcement Learning Nanodegree
 
+![video](https://user-images.githubusercontent.com/63595824/88564330-5f5c1080-d033-11ea-88d4-e0f4b3fdd98c.gif)
+
 ### Quick Installation
 
 To set up the python environment and install all requirements for using this repository, follow the instructions given below:
