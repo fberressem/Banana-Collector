@@ -63,6 +63,7 @@ The hyperparameters used are given in the table below:
 | Batchsize | 2^11 |
 | Size of replay buffer | 2^20 |
 | Number of replays per learning phase | 2 |
+| Learning rate <img src="https://latex.codecogs.com/svg.latex?\alpha" /> | 0.001 |
 
 
 ### Results
