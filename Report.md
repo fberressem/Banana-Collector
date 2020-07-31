@@ -51,6 +51,19 @@ The neural networks used here were simple *dense networks*, i.e. they consist of
 - Hidden layer with `16` neurons and `ReLU`-activation
 - Output layer with `4` neurons (corresponding to the 4 possible actions) without activation function, i.e. linear
 
+The hyperparameters used are given in the table below:
+
+| Hyperparameter   |      Value      |
+|----------|:-------------:|
+| Q-target parameter <img src="https://latex.codecogs.com/svg.latex?\tau" /> |  0.1  |
+| Discount factor <img src="https://latex.codecogs.com/svg.latex?\gamma" /> |    0.95   |
+| Start value of <img src="https://latex.codecogs.com/svg.latex?\epsilon" /> | 1.0 |
+| Decay rate of <img src="https://latex.codecogs.com/svg.latex?\epsilon" /> | 0.99 |
+| Minimum value of <img src="https://latex.codecogs.com/svg.latex?\epsilon" /> | 0.01 |
+| Batchsize | 2^11 |
+| Size of replay buffer | 2^20 |
+| Number of replays per learning phase | 2 |
+
 
 ### Results
 
