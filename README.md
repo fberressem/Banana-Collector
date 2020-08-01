@@ -5,7 +5,7 @@ Solution to the first project of Udacitys Reinforcement Learning Nanodegree
 
 ### Quick Installation
 
-To set up the python environment and install all requirements for using this repository, follow the instructions given below:
+To set up the python environment and install all requirements for using this repository on Linux OS, follow the instructions given below:
 1. Create and activate a new environment with Python 3:
     ```bash
     python3 -m venv /path/to/virtual/environment
@@ -24,6 +24,10 @@ To set up the python environment and install all requirements for using this rep
     unzip Banana_Linux.zip
     rm Banana_Linux.zip
     ```
+
+For using this repository using Windows OS or Mac OSX, please follow the instructions given ![here](https://github.com/udacity/deep-reinforcement-learning#dependencies). Afterwards download the Unity-environment for ![Windows (64-bit)](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/VisualBanana_Windows_x86_64.zip), ![Windows (32-bit)](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/VisualBanana_Windows_x86.zip) or ![Mac](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/VisualBanana.app.zip) and unzip it in this repository.
+
+
 
 ### Quick Start
 
