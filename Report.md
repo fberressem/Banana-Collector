@@ -3,9 +3,9 @@
 The approach implemented in this repository is based on *reinforcement learning*, i.e. it is a machine learning approach in which an agent tries to improve his performance by interacting with the environment. In every step *t* of an episode, the agent chooses one of the actions mentioned above *A<sub>t</sub>* depending on the state *S<sub>t</sub>* he is in and observes the next state as well as a response in the form of a reward *R<sub>t</sub>* which is a real number in general. In this implementation, the algorithm is *value-based*, which means that the agent chooses the action by consulting an *action-value function*    
 <p align="center"> <img src="https://latex.codecogs.com/svg.latex?&space;q_\pi(s,a)" /></p>
 
-which is given as the expected return *G* when taking action *a* in state *s* and subsequently following policy <img src="https://latex.codecogs.com/svg.latex?&space;\pi" />:
+which is given as the expected return *G* when taking action *a* in state *s* and subsequently following policy <img src="https://latex.codecogs.com/svg.latex?\pi" />:
 
-<p align="center"> <img src="https://latex.codecogs.com/svg.latex?&space;q_\pi(s,a)=\left<G_t|S_t=s,A_t=a\right>_\pi=\left<\left.\sum_{k=0}^\infty\gamma^kR_{t+k+1}\right|S_t=s,A_t=a\right>_\pi" /></p>
+<p align="center"> <img src="https://latex.codecogs.com/svg.latex?q_\pi(s,a)=\left<G_t|S_t=s,A_t=a\right>_\pi=\left<\left.\sum_{k=0}^\infty\gamma^kR_{t+k+1}\right|S_t=s,A_t=a\right>_\pi" /></p>
 
 In this equation <img src="https://latex.codecogs.com/svg.latex?&space;0\leq\gamma<1" /> is a discounting factor that describes how valuable future rewards are compared to present ones and ensures that the expected return *G* is finite as long as the reward sequence *{ R<sub>k</sub> }* is bounded.
 
