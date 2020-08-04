@@ -5,7 +5,7 @@ The approach implemented in this repository is based on *reinforcement learning*
 
 which is given as the expected return *G* when taking action *a* in state *s* and subsequently following policy <img src="https://latex.codecogs.com/svg.latex?\pi" />:
 
-<p align="center"> <img src="https://latex.codecogs.com/svg.latex?q_\pi(s,a)=\left<G_t|S_t=s,A_t=a\right>_\pi=\left<\left.\sum_{k=0}^\infty\gamma^kR_{t+k+1}\right|S_t=s,A_t=a\right>_\pi" /></p>
+<p align="center"> <img src="https://latex.codecogs.com/svg.latex?q_%5Cpi%28s%2Ca%29%3D%5Cleft%3CG_t%7CS_t%3Ds%2CA_t%3Da%5Cright%3E_%5Cpi%3D%5Cleft%3C%5Cleft.%5Csum_%7Bk%3D0%7D%5E%5Cinfty%5Cgamma%5EkR_%7Bt&plus;k&plus;1%7D%5Cright%7CS_t%3Ds%2CA_t%3Da%5Cright%3E_%5Cpi" /> </p>
 
 In this equation <img src="https://latex.codecogs.com/svg.latex?&space;0\leq\gamma<1" /> is a discounting factor that describes how valuable future rewards are compared to present ones and ensures that the expected return *G* is finite as long as the reward sequence *{ R<sub>k</sub> }* is bounded.
 
